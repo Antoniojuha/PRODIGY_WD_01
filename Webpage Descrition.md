@@ -94,13 +94,13 @@ Overall, the webpage demonstrates how these three web technologies work together
 
 Technology    |  Purpose
 
-HTML5	      |  Used to create the structure and content of the webpage.
+HTML5          |  Used to create the structure and content of the webpage.
 
-CSS3	      |  Used to design the layout, colors, animations, and responsive appearance.
+CSS3	        |  Used to design the layout, colors, animations, and responsive appearance.
 
-JavaScript    |	Used to add scrolling effects and interactive navigation behavior.
+JavaScript     |	Used to add scrolling effects and interactive navigation behavior.
 
-Google Fonts  |	Used to improve the typography with the "Plus Jakarta Sans" font.
+Google Fonts   |	Used to improve the typography with the "Plus Jakarta Sans" font.
 
-Flexbox	      |  Used to align and organize navigation items efficiently.
+Flexbox	       |  Used to align and organize navigation items efficiently.
 
