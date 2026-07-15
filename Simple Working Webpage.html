@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Navigation Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #070a13;
+            --bg-surface: #ffffff;
+            --text-light: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --color-primary: #6366f1;
+            --color-primary-hover: #4f46e5;
+            --nav-height-normal: 80px;
+            --nav-height-scrolled: 64px;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            height: var(--nav-height-normal);
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition-smooth);
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            display: inline-block;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.925rem;
+            font-weight: 500;
+            position: relative;
+            padding: 4px 0;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-primary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-item:hover {
+            color: var(--text-light);
+        }
+
+        .nav-item:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-cta {
+            text-decoration: none;
+            background-color: var(--text-light);
+            color: var(--text-dark);
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-cta:hover {
+            background-color: var(--color-primary);
+            color: var(--text-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+        }
+
+        .navbar.scrolled {
+            height: var(--nav-height-scrolled);
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+        }
+
+        .navbar.scrolled .logo {
+            color: var(--text-dark);
+        }
+
+        .navbar.scrolled .nav-item {
+            color: var(--text-muted);
+        }
+
+        .navbar.scrolled .nav-item:hover {
+            color: var(--text-dark);
+        }
+
+        .navbar.scrolled .nav-cta {
+            background-color: var(--color-primary);
+            color: var(--text-light);
+        }
+
+        .navbar.scrolled .nav-cta:hover {
+            background-color: var(--color-primary-hover);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .hero-section {
+            height: 90vh;
+            background: radial-gradient(circle at top left, #1e1b4b 0%, var(--bg-base) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            text-align: center;
+            padding: 0 24px;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            max-width: 800px;
+            margin-bottom: 24px;
+        }
+
+        .hero-section p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .content-section {
+            max-width: 720px;
+            margin: 80px auto;
+            padding: 0 24px;
+        }
+
+        .content-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-top: 48px;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .content-section p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            line-height: 1.75;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span>Metasystem</span><span class="logo-dot"></span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-item">Platform</a></li>
+                <li><a href="#" class="nav-item">Solutions</a></li>
+                <li><a href="#" class="nav-item">Resources</a></li>
+                <li><a href="#" class="nav-item">Pricing</a></li>
+            </ul>
+            <a href="#" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <h1>Intelligent systems built for dynamic scale</h1>
+        <p>Scroll downward to observe the seamless transition of the glassmorphic global navigation matrix.</p>
+    </header>
+
+    <main class="content-section">
+        <h2>Global Infrastructure</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec arcu id elit accumsan sodales non interdum erat. Phasellus vestibulum elementum ante sed elementum. Proin vitae dictum mauris. Ut elementum elementum turpis ac volutpat.</p>
+        
+        <h2>Autonomous Deployments</h2>
+        <p>Vestibulum tristique sapien in neque convallis sodales. Quisque scelerisque risus a lectus aliquet, ac posuere purus bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+        <h2>Cryptographic Security</h2>
+        <p>Aliquam nec arcu id elit accumsan sodales non interdum erat. Phasellus vestibulum elementum ante sed elementum. Proin vitae dictum mauris. Ut elementum elementum turpis ac volutpat.</p>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navbar = document.getElementById('navbar');
+
+            const handleScroll = () => {
+                if (window.scrollY > 40) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            };
+
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        });
+    </script>
+</body>
+</html>
